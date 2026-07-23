@@ -75,7 +75,7 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e){
 
     const nama = document.getElementById("nama").value;
     const hp = document.getElementById("hp").value;
-    const alamat = document.getElementById("alamat").value;
+    const kelas = document.getElementById("kelas").value;
     const metodeBayar = metode.value;
 
     if(cart.length === 0){
@@ -83,10 +83,10 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e){
         return;
     }
 
-    let pesan = `*PESANAN BARU - RODO SHOP*\n\n`;
+    let pesan = `*PESANAN BARU - LUNAR'S SHOP*\n\n`;
     pesan += `Nama: ${nama}\n`;
     pesan += `HP: ${hp}\n`;
-    pesan += `Alamat: ${alamat}\n`;
+    pesan += `Kelas dan Ruangan: ${kelas}\n`;
     pesan += `Pembayaran: ${metodeBayar}\n\n`;
     pesan += `DETAIL PESANAN:\n`;
 

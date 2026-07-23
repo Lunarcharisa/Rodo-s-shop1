@@ -2,7 +2,6 @@ function formatRupiah(angka) {
     return "Rp" + angka.toLocaleString("id-ID");
 }
 
-// Ambil data keranjang
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const cartItems = document.getElementById("cartItems");
@@ -96,9 +95,5 @@ function checkout(){
     window.location.href="checkout.html";
 
 }
-
-// ===============================
-// LOAD HALAMAN
-// ===============================
 
 tampilkanKeranjang();

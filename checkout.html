@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Checkout | Rodo's Shop</title>
+    <title>Checkout | Lunar's Shop</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -23,9 +20,7 @@
 
         <h1>💳 Checkout</h1>
 
-        <p>
-            Lengkapi data berikut untuk menyelesaikan pesananmu.
-        </p>
+        <p>Lengkapi data berikut untuk menyelesaikan pesananmu.</p>
 
         <div class="nav-btn">
 
@@ -38,107 +33,102 @@
             </a>
 
         </div>
+
     </div>
 
 </header>
 
-
 <section class="container">
 
-<div class="product" style="width:700px;max-width:100%;padding:30px;">
+    <div class="product" style="width:700px;max-width:100%;padding:30px;">
 
+        <h2 style="text-align:center;margin-bottom:25px;">
+            Data Pembeli
+        </h2>
 
-<h2 style="text-align:center;margin-bottom:25px;">
-Data Pembeli
-</h2>
+        <form id="checkoutForm">
 
-<form id="checkoutForm">
+            <label>Nama Lengkap</label>
 
-<label>Nama Lengkap</label>
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama lengkap"
+                required>
 
-<input
-type="text"
-id="nama"
-required>
+            <br><br>
 
-<br><br>
+            <label>Nomor HP</label>
 
-<label>Nomor HP</label>
+            <input
+                type="tel"
+                id="hp"
+                placeholder="08xxxxxxxxxx"
+                required>
 
-<input
-type="tel"
-id="hp"
-required>
+            <br><br>
 
-<br><br>
+            <label>Kelas & Ruangan</label>
 
-<label>Alamat</label>
+            <input
+                type="text"
+                id="kelas"
+                placeholder="Contoh: XI TKJ 3"
+                required>
 
-<textarea
-id="alamat"
-rows="4"
-required></textarea>
+            <br><br>
 
-<br><br>
+            <label>Metode Pembayaran</label>
 
-<label>Metode Pembayaran</label>
+            <select id="metode" required>
 
-<select id="metode" onchange="toggleQR()">
+                <option value="COD/Cash">
+                    COD / Cash
+                </option>
 
-<option>Transfer Bank</option>
-<option>QRIS</option>
-<option>COD/Cash</option>
+            </select>
 
-</select>
+            <div id="paymentInfo" style="margin-top:20px;"></div>
 
-<div id="paymentInfo" style="margin-top:15px;"></div>
+            <br>
 
-<div id="qrBox" style="display:none; margin-top:20px; text-align:center;">
-    <h3>Scan QRIS untuk pembayaran</h3>
-    <img src="contoh-qris.jpeg" style="width:250px;border-radius:12px;">
-</div>
+            <h3>🛒 Ringkasan Pesanan</h3>
 
-<br><br>
+            <div id="orderList"></div>
 
-<h3>
-Ringkasan Pesanan
-</h3>
+            <hr>
 
-<div id="orderList"></div>
+            <h2>
+                Total :
+                <span id="totalHarga">
+                    Rp0
+                </span>
+            </h2>
 
-<hr>
+            <br>
 
-<h2>
-Total :
-<span id="totalHarga">
-Rp0
-</span>
-</h2>
+            <button
+                type="submit"
+                class="btn checkout"
+                style="width:100%;font-size:18px;">
 
-<br>
+                ✅ Buat Pesanan via WhatsApp
 
-<button
-type="submit"
-style="width:100%;">
+            </button>
 
-✅ Buat Pesanan
+        </form>
 
-</button>
-
-</form>
-
-</div>
+    </div>
 
 </section>
 
 <footer>
 
-© 2026 Rodo's Shop
+    © 2026 Lunar's Shop | Soft Cookies, Delivered to Your Class!
 
 </footer>
 
 <script src="checkout.js"></script>
 
 </body>
-
 </html>

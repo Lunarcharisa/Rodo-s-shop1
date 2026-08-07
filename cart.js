@@ -1,24 +1,26 @@
-function formatRupiah(angka) {
+function formatRupiah(angka){
     return "Rp" + angka.toLocaleString("id-ID");
 }
 
-// Ambil data keranjang
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const cartItems = document.getElementById("cartItems");
 const totalHarga = document.getElementById("totalHarga");
 
-let total = 0;
+function simpanCart(){
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-function tampilkanKeranjang() {
+function tampilkanKeranjang(){
 
     cartItems.innerHTML = "";
-    total = 0;
 
-    if (cart.length === 0) {
+    let total = 0;
+
+    if(cart.length === 0){
 
         cartItems.innerHTML = `
-            <h3 style="text-align:center;">
+            <h3 style="text-align:center;padding:30px;">
                 🛒 Keranjang masih kosong
             </h3>
         `;
@@ -27,27 +29,44 @@ function tampilkanKeranjang() {
         return;
     }
 
-    cart.forEach((item, index) => {
+    cart.forEach((item,index)=>{
 
-        total += item.harga;
+        const subtotal = item.price * item.qty;
+        total += subtotal;
 
         cartItems.innerHTML += `
 
         <div class="item">
 
-            <img src="${item.gambar}" class="cart-img">
+            <img src="${item.image}" class="cart-img">
 
-            <div style="flex:1;">
+            <div class="item-action">
 
-                <h3>${item.nama}</h3>
+                <button onclick="tambah(${index})">+</button>
 
-                <p>${formatRupiah(item.harga)}</p>
+                <span>${item.qty}</span>
+
+                <button onclick="kurang(${index})">−</button>
+
+                <button class="hapus-btn"
+                        onclick="hapusItem(${index})">
+                    🗑️
+                </button>
 
             </div>
 
-            <button onclick="hapusItem(${index})">
-                Hapus
-            </button>
+            <div class="item-info">
+
+                <h3>${item.name}</h3>
+
+                <p>${formatRupiah(item.price)}</p>
+
+                <small>
+                    Subtotal :
+                    <b>${formatRupiah(subtotal)}</b>
+                </small>
+
+            </div>
 
         </div>
 
@@ -59,23 +78,53 @@ function tampilkanKeranjang() {
 
 }
 
-function hapusItem(index){
+function tambah(index){
 
-    cart.splice(index,1);
+    cart[index].qty++;
 
-    localStorage.setItem("cart",JSON.stringify(cart));
+    simpanCart();
 
     tampilkanKeranjang();
 
 }
 
+function kurang(index){
+
+    cart[index].qty--;
+
+    if(cart[index].qty <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+    simpanCart();
+
+    tampilkanKeranjang();
+
+}
+
+function hapusItem(index){
+
+    if(confirm("Hapus produk ini?")){
+
+        cart.splice(index,1);
+
+        simpanCart();
+
+        tampilkanKeranjang();
+
+    }
+
+}
+
 function hapusSemua(){
 
-    if(confirm("Yakin ingin mengosongkan keranjang?")){
+    if(confirm("Kosongkan seluruh keranjang?")){
+
+        cart = [];
 
         localStorage.removeItem("cart");
-
-        cart=[];
 
         tampilkanKeranjang();
 
@@ -96,9 +145,5 @@ function checkout(){
     window.location.href="checkout.html";
 
 }
-
-// ===============================
-// LOAD HALAMAN
-// ===============================
 
 tampilkanKeranjang();

@@ -1,137 +1,273 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Lunar's Shop</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
+
     <div class="hero-box">
+
         <h1>🍪 Lunar's Shop</h1>
-        <p>Soft & Fresh Cookies, Delivered to Your Class!</p>
+
+        <p>
+            Soft & Fresh Cookies, Delivered to Your Class!
+        </p>
 
         <div class="nav-btn">
-            <a href="checkout.html" class="btn checkout">🧾 Checkout</a>
-            <a href="cart.html" class="btn cart" id="cartButton">🛒 Keranjang</a>
+
+            <a
+                href="checkout.html"
+                class="btn checkout">
+                🧾 Checkout
+            </a>
+
+            <a
+                href="cart.html"
+                class="btn cart"
+                id="cartButton">
+                🛒 Keranjang
+            </a>
+
         </div>
+
     </div>
+
 </header>
+
 
 <section class="container">
 
+
+    <!-- CHOCOLATE -->
+
     <div class="product">
-        <img src="coklat.jpg" alt="Chocolate Soft Cookie">
 
-        <h3>🍪 Chocolate Soft Cookie</h3>
+        <img
+            src="coklat.jpg"
+            alt="Chocolate Soft Cookie">
 
-        <p class="price">Rp10.000</p>
+        <h3>
+            🍪 Chocolate Soft Cookie
+        </h3>
 
-        <button class="btn-now"
-            onclick="buyNow('Chocolate Soft Cookie',10000,'coklat.jpg')">
+        <p class="price">
+            Rp10.000
+        </p>
+
+        <button
+            class="btn-now"
+            onclick="buyNow(
+                'Chocolate Soft Cookie',
+                10000,
+                'coklat.jpg'
+            )">
+
             💳 Checkout Sekarang
+
         </button>
 
         <button
-            onclick="addToCart('Chocolate Soft Cookie',10000,'coklat.jpg',this)">
+            onclick="addToCart(
+                'Chocolate Soft Cookie',
+                10000,
+                'coklat.jpg',
+                this
+            )">
+
             🛒 Masukkan Ke Keranjang
+
         </button>
+
     </div>
 
+
+    <!-- ORIGINAL -->
+
     <div class="product">
-        <img src="original.jpg" alt="Original Soft Cookie">
 
-        <h3>🍪 Original Soft Cookie</h3>
+        <img
+            src="original.jpg"
+            alt="Original Soft Cookie">
 
-        <p class="price">Rp8.000</p>
+        <h3>
+            🍪 Original Soft Cookie
+        </h3>
 
-        <button class="btn-now"
-            onclick="buyNow('Original Soft Cookie',8000,'original.jpg')">
+        <p class="price">
+            Rp8.000
+        </p>
+
+        <button
+            class="btn-now"
+            onclick="buyNow(
+                'Original Soft Cookie',
+                8000,
+                'original.jpg'
+            )">
+
             💳 Checkout Sekarang
+
         </button>
 
         <button
-            onclick="addToCart('Original Soft Cookie',8000,'original.jpg',this)">
+            onclick="addToCart(
+                'Original Soft Cookie',
+                8000,
+                'original.jpg',
+                this
+            )">
+
             🛒 Masukkan Ke Keranjang
+
         </button>
+
     </div>
+
+
+    <!-- BUNDLING -->
 
     <div class="product">
 
-        <span class="badge">BUNDLING</span>
+        <span class="badge">
+            BUNDLING
+        </span>
+
 
         <div class="bundle-image-wrap">
 
-            <img id="bundleImage"
+            <img
+                id="bundleImage"
                 src="bundling-original.jpg"
                 alt="Original Bundle">
 
+
             <div class="qty-side">
 
-                <button type="button" onclick="changeQty(1)">+</button>
+                <button
+                    type="button"
+                    onclick="changeQty(1)">
+                    +
+                </button>
 
-                <span id="bundleQty">1</span>
+                <span id="bundleQty">
+                    1
+                </span>
 
-                <button type="button" onclick="changeQty(-1)">-</button>
+                <button
+                    type="button"
+                    onclick="changeQty(-1)">
+                    -
+                </button>
 
             </div>
 
         </div>
 
-        <h3 id="bundleTitle">🍪 Original Bundle</h3>
 
-        <p class="price" id="bundlePrice">Rp14.000</p>
+        <h3 id="bundleTitle">
+            🍪 Original Bundle
+        </h3>
+
+
+        <p
+            class="price"
+            id="bundlePrice">
+
+            Rp14.000
+
+        </p>
+
 
         <div class="bundle-tabs">
 
-            <button type="button"
+            <button
+                type="button"
                 class="tab-btn active"
                 onclick="changeBundle('original')">
+
                 Original
+
             </button>
 
-            <button type="button"
+            <button
+                type="button"
                 class="tab-btn"
                 onclick="changeBundle('coklat')">
+
                 Coklat
+
             </button>
 
-            <button type="button"
+            <button
+                type="button"
                 class="tab-btn"
                 onclick="changeBundle('combo')">
+
                 Combo 2 Rasa
+
             </button>
 
         </div>
 
-        <button id="bundleBuy"
+
+        <button
+            id="bundleBuy"
             class="btn-now"
             onclick="buyBundleNow()">
+
             💳 Checkout Sekarang
+
         </button>
 
-        <button id="bundleCart"
+
+        <button
+            id="bundleCart"
             onclick="addBundleToCart(this)">
+
             🛒 Masukkan Ke Keranjang
+
         </button>
 
     </div>
 
 </section>
 
+
 <footer>
-    <p>© 2026 Lunar's Shop | Soft Cookies, Delivered to Your Class!</p>
+
+    <p>
+        © 2026 Lunar's Shop |
+        Soft Cookies, Delivered to Your Class!
+    </p>
+
 </footer>
 
-<div id="toast" class="toast">
+
+<div
+    id="toast"
+    class="toast">
+
     ✅ Produk berhasil ditambahkan!
+
 </div>
 
-<script src="script.js"></script>
+
+<!-- CACHE BUSTER -->
+<script src="script.js?v=999"></script>
 
 </body>
+
 </html>

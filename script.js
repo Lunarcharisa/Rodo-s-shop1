@@ -6,211 +6,428 @@ let bundleData = {
 
 let bundleQty = 1;
 
-function changeQty(change){
+function changeQty(change) {
 
-    bundleQty += change;
+    bundleQty = Number(bundleQty) || 1;
 
-    if(bundleQty < 1) bundleQty = 1;
+    bundleQty += Number(change) || 0;
 
-    document.getElementById("bundleQty").textContent = bundleQty;
+    if (bundleQty < 1) {
+        bundleQty = 1;
+    }
 
+    const element =
+        document.getElementById("bundleQty");
+
+    if (element) {
+        element.textContent = bundleQty;
+    }
 }
 
-function changeBundle(type){
+function changeBundle(type) {
 
-    const image = document.getElementById("bundleImage");
-    const title = document.getElementById("bundleTitle");
-    const price = document.getElementById("bundlePrice");
+    const image =
+        document.getElementById("bundleImage");
 
-    document.querySelectorAll(".tab-btn").forEach(tab=>{
+    const title =
+        document.getElementById("bundleTitle");
+
+    const price =
+        document.getElementById("bundlePrice");
+
+    const tabs =
+        document.querySelectorAll(".tab-btn");
+
+
+    tabs.forEach(function(tab) {
         tab.classList.remove("active");
     });
 
-    if(type==="original"){
 
-        bundleData={
-            name:"Original Bundle",
-            price:14000,
-            image:"bundling-original.jpg"
+    if (type === "original") {
+
+        bundleData = {
+            name: "Original Bundle",
+            price: 14000,
+            image: "bundling-original.jpg"
         };
 
-        title.innerHTML="🍪 Original Bundle";
-        price.innerHTML="Rp14.000";
-        image.src=bundleData.image;
+        title.innerHTML =
+            "🍪 Original Bundle";
 
-        document.querySelectorAll(".tab-btn")[0].classList.add("active");
+        price.innerHTML =
+            "Rp14.000";
 
+        image.src =
+            bundleData.image;
+
+        if (tabs[0]) {
+            tabs[0].classList.add("active");
+        }
     }
 
-    if(type==="coklat"){
 
-        bundleData={
-            name:"Chocolate Bundle",
-            price:18000,
-            image:"bundling-coklat.jpg"
+    if (type === "coklat") {
+
+        bundleData = {
+            name: "Chocolate Bundle",
+            price: 18000,
+            image: "bundling-coklat.jpg"
         };
 
-        title.innerHTML="🍫 Chocolate Bundle";
-        price.innerHTML="Rp18.000";
-        image.src=bundleData.image;
+        title.innerHTML =
+            "🍫 Chocolate Bundle";
 
-        document.querySelectorAll(".tab-btn")[1].classList.add("active");
+        price.innerHTML =
+            "Rp18.000";
 
+        image.src =
+            bundleData.image;
+
+        if (tabs[1]) {
+            tabs[1].classList.add("active");
+        }
     }
 
-    if(type==="combo"){
 
-        bundleData={
-            name:"Combo Bundle (Original + Chocolate)",
-            price:15000,
-            image:"bundling-combo.jpg"
+    if (type === "combo") {
+
+        bundleData = {
+            name: "Combo Bundle (Original + Chocolate)",
+            price: 15000,
+            image: "bundling-combo.jpg"
         };
 
-        title.innerHTML="🍪 Combo Bundle";
-        price.innerHTML="Rp15.000";
-        image.src=bundleData.image;
+        title.innerHTML =
+            "🍪 Combo Bundle";
 
-        document.querySelectorAll(".tab-btn")[2].classList.add("active");
+        price.innerHTML =
+            "Rp15.000";
 
+        image.src =
+            bundleData.image;
+
+        if (tabs[2]) {
+            tabs[2].classList.add("active");
+        }
     }
 
-    bundleQty=1;
 
-    document.getElementById("bundleQty").textContent=bundleQty;
+    bundleQty = 1;
 
+    const qty =
+        document.getElementById("bundleQty");
+
+    if (qty) {
+        qty.textContent = "1";
+    }
 }
 
-function showToast(text){
 
-    const toast=document.getElementById("toast");
+function showToast(text) {
 
-    if(!toast) return;
+    const toast =
+        document.getElementById("toast");
 
-    toast.innerHTML=text;
+    if (!toast) {
+        return;
+    }
+
+    toast.innerHTML = text;
 
     toast.classList.add("show");
 
-    setTimeout(()=>{
+    setTimeout(function() {
 
         toast.classList.remove("show");
 
-    },2000);
-
+    }, 2000);
 }
 
-function updateCartButton(){
 
-    const btn=document.getElementById("cartButton");
+/* ==========================================
+   UPDATE TOMBOL KERANJANG
+========================================== */
 
-    if(!btn) return;
+function updateCartButton() {
 
-    let cart=JSON.parse(localStorage.getItem("cart")) || [];
+    const button =
+        document.getElementById("cartButton");
 
-    let total=0;
 
-    cart.forEach(item=>{
+    if (!button) {
+        return;
+    }
 
-        total += item.qty;
+
+    let cart = [];
+
+
+    try {
+
+        const data =
+            localStorage.getItem("cart");
+
+
+        if (data) {
+
+            const parsed =
+                JSON.parse(data);
+
+
+            if (Array.isArray(parsed)) {
+
+                cart = parsed;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Data cart rusak. Cart dikosongkan."
+        );
+
+        cart = [];
+
+    }
+
+
+    let total = 0;
+
+
+    cart.forEach(function(item) {
+
+        const jumlah =
+            parseInt(item.qty, 10);
+
+
+        if (!isNaN(jumlah)) {
+
+            total += jumlah;
+
+        }
 
     });
 
-    btn.innerHTML=`🛒 Keranjang (${total})`;
+    if (isNaN(total)) {
+
+        total = 0;
+
+    }
+
+    button.textContent =
+        "🛒 Keranjang (" + total + ")";
 
 }
 
-function addToCart(name,price,image,button=null,qty=1){
+function addToCart(
+    name,
+    price,
+    image,
+    button = null,
+    qty = 1
+) {
 
-    let cart=JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = [];
 
-    const existing=cart.find(item=>item.name===name);
 
-    if(existing){
+    try {
 
-        existing.qty += qty;
+        const data =
+            localStorage.getItem("cart");
 
-    }else{
+
+        if (data) {
+
+            const parsed =
+                JSON.parse(data);
+
+
+            if (Array.isArray(parsed)) {
+
+                cart = parsed;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        cart = [];
+
+    }
+
+
+    qty =
+        parseInt(qty, 10);
+
+
+    if (isNaN(qty) || qty < 1) {
+
+        qty = 1;
+
+    }
+
+
+    const existing =
+        cart.find(function(item) {
+
+            return item.name === name;
+
+        });
+
+
+    if (existing) {
+
+        let oldQty =
+            parseInt(existing.qty, 10);
+
+
+        if (isNaN(oldQty)) {
+            oldQty = 0;
+        }
+
+
+        existing.qty =
+            oldQty + qty;
+
+    } else {
 
         cart.push({
 
-            name:name,
-            price:price,
-            image:image,
-            qty:qty
+            name: name,
+
+            price:
+                Number(price) || 0,
+
+            image: image,
+
+            qty: qty
 
         });
 
     }
 
-    localStorage.setItem("cart",JSON.stringify(cart));
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
 
     updateCartButton();
 
-    showToast("🛒 "+name+" berhasil ditambahkan!");
 
-    if(button){
+    showToast(
+        "🛒 " +
+        name +
+        " berhasil ditambahkan!"
+    );
 
-        button.disabled=true;
 
-        button.innerHTML="✅ Ditambahkan";
+    if (button) {
 
-        setTimeout(()=>{
+        button.disabled = true;
 
-            button.disabled=false;
+        button.innerHTML =
+            "✅ Ditambahkan";
 
-            button.innerHTML="🛒 Tambah";
 
-        },1200);
+        setTimeout(function() {
+
+            button.disabled = false;
+
+            button.innerHTML =
+                "🛒 Masukkan Ke Keranjang";
+
+        }, 1200);
 
     }
 
 }
 
-function addBundleToCart(button){
+function addBundleToCart(button) {
 
     addToCart(
 
         bundleData.name,
+
         bundleData.price,
+
         bundleData.image,
+
         button,
+
         bundleQty
 
     );
 
 }
 
-function buyNow(name,price,image,qty=1){
+function buyNow(
+    name,
+    price,
+    image,
+    qty = 1
+) {
 
-    const cart=[{
+    qty =
+        parseInt(qty, 10);
 
-        name:name,
-        price:price,
-        image:image,
-        qty:qty
+
+    if (isNaN(qty) || qty < 1) {
+        qty = 1;
+    }
+
+
+    const cart = [{
+
+        name: name,
+
+        price:
+            Number(price) || 0,
+
+        image: image,
+
+        qty: qty
 
     }];
 
-    localStorage.setItem("cart",JSON.stringify(cart));
 
-    window.location.href="checkout.html";
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+    window.location.href =
+        "checkout.html";
 
 }
 
-function buyBundleNow(){
+function buyBundleNow() {
 
     buyNow(
 
         bundleData.name,
+
         bundleData.price,
+
         bundleData.image,
+
         bundleQty
 
     );
 
 }
 
-window.onload=function(){
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-    updateCartButton();
+        updateCartButton();
 
-};
+    }
+);

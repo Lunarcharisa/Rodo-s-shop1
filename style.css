@@ -252,12 +252,6 @@ header{
 
 }
 
-/* ==========================
-
-   BUNDLE IMAGE
-
-========================== */
-
 .bundle-image-wrap{
 
     display:flex;
@@ -285,12 +279,6 @@ header{
     box-shadow:0 8px 20px rgba(0,0,0,.12);
 
 }
-
-/* ==========================
-
-   QTY BUTTON
-
-========================== */
 
 .qty-side{
 
@@ -545,9 +533,6 @@ footer{
 }
 
 }
-
-
-CSS Tambahan yang Disarankan
 
 .item{
 display:flex;
